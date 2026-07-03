@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'testserver']
 INSTALLED_APPS = [
     'Learning_Logs',
     'accounts',
+    # Third party app
+    'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -128,3 +130,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # my settings
 LOGIN_REDIRECT_URL = 'Learning_Logs:index'
 LOGOUT_REDIRECT_URL = 'Learning_Logs:index'
+LOGIN_URL = 'accounts:login'

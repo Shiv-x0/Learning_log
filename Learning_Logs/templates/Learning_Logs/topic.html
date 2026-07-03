@@ -1,31 +1,29 @@
 {% extends 'Learning_Logs/base.html' %}
 
+{% block page_header %}
+    <h2>{{ topic.text }}</h2>
+{% endblock page_header %}
+
 {% block content %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <p>
+                <a class="btn btn-primary" href="{% url 'Learning_Logs:new_entry' topic.id %}">Add new entry</a>
+            </p>
 
-
-<p>Topic : {{ topic }}</p>
-
-<p>Entries:</p>
-<p>
-    <a href = "{% url 'Learning_Logs:new_entry' topic.id %}">
-        Add new Entry
-    </a>
-</p>
-
-<ul>
-    {% for entry in entries %}
-    <li>
-        <p>{{ entry.date_added|date:'M d, Y H:i'}}</p>
-        <p>{{ entry.text|linebreaks }}</p>
-        <p>
-            <a href = "{% url 'Learning_Logs:edit_entry' entry.id %}"> 
-                Edit Entry
-            </a>
-        </p>
-    </li>
-    {% empty %}
-    <li>There are no entries for this topic yet.</li>
-    {% endfor %}
-</ul>
-
+            {% for entry in entries %}
+                <div class="border rounded p-3 mb-3">
+                    <h4 class="h6 mb-2">
+                        {{ entry.date_added|date:'M d, Y H:i' }}
+                        <small class="ms-2">
+                            <a href="{% url 'Learning_Logs:edit_entry' entry.id %}">edit entry</a>
+                        </small>
+                    </h4>
+                    <p class="mb-0">{{ entry.text|linebreaks }}</p>
+                </div>
+            {% empty %}
+                <p>There are no entries for this topic yet.</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}
