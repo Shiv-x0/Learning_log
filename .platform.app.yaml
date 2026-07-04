@@ -1,0 +1,23 @@
+name : "LL_project"
+type: "python:3.10"
+
+relationships:
+  database: "db:postgresql"
+
+# The configuration of the app when it is exposed to the web
+
+web:
+  upstream:
+    socket_family: unix
+  commands:
+    start: "gunicorn -w 4 -b unix:$SOCKET LL_project.wsgi:application"
+  locations:
+    "/":
+      passthru: true
+    '/static/':
+      root: "static"
+      expires: 1h
+      allow: true
+
+#the size of the presistent disk of teh application (in MB)
+disk: 512
