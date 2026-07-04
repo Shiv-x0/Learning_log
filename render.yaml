@@ -4,7 +4,7 @@ services:
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt && pip install -r requirements_remote.txt"
-    startCommand: "python manage.py migrate && gunicorn LL_project.wsgi:application --log-file -"
+    startCommand: "bash start.sh"
     envVars:
       - key: PYTHON_VERSION
         value: 3.10.13
